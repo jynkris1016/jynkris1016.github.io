@@ -4,49 +4,54 @@
 <meta charset="UTF-8">
 <title>Yinuo Jing - Homepage</title>
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<!-- 引入更优雅的字体 -->
+<link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
 <style>
   :root {
-    --primary-color: #2563eb;
-    --text-main: #374151;
-    --text-light: #6b7280;
-    --bg-color: #f3f4f6;
+    --primary-color: #0366d6;
+    --text-main: #24292e;
+    --text-light: #586069;
+    --bg-color: #f6f8fa;
     --card-bg: #ffffff;
-    --border-color: #e5e7eb;
+    --border-color: #e1e4e8;
   }
 
   body {
-    font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Arial, sans-serif;
+    font-family: 'Roboto', -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif;
     background-color: var(--bg-color);
     color: var(--text-main);
     line-height: 1.6;
     margin: 0;
-    padding: 20px 10px;
+    padding: 30px 15px;
   }
 
-  /* 主卡片容器 */
+  /* 主卡片容器：增加轻微渐变提升质感 */
   .container {
     max-width: 900px;
-    margin: 20px auto;
-    background: var(--card-bg);
+    margin: 0 auto;
+    background: linear-gradient(to bottom, #ffffff, #fafbfc);
     padding: 50px 60px;
-    border-radius: 16px;
-    box-shadow: 0 10px 30px rgba(0,0,0,0.04);
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.05), 0 1px 3px rgba(0,0,0,0.03);
+    border: 1px solid var(--border-color);
   }
 
   /* 标题与分割线 */
   h1 {
     font-size: 2.2rem;
-    color: #111827;
-    margin: 0 0 10px 0;
+    font-weight: 700;
+    color: #24292e;
+    margin: 0 0 15px 0;
+    letter-spacing: -0.5px;
   }
   
   h2 {
-    font-size: 1.5rem;
-    color: #111827;
-    border-bottom: 2px solid var(--border-color);
-    padding-bottom: 10px;
-    margin-top: 50px;
+    font-size: 1.4rem;
+    font-weight: 500;
+    color: #24292e;
+    border-bottom: 1px solid var(--border-color);
+    padding-bottom: 8px;
+    margin-top: 45px;
     margin-bottom: 25px;
   }
 
@@ -58,7 +63,7 @@
   }
   a:hover {
     text-decoration: underline;
-    color: #1d4ed8;
+    color: #005cc5;
   }
 
   /* 个人信息区块 */
@@ -70,15 +75,16 @@
   
   .profile-info {
     flex: 1;
+    font-size: 1.05rem;
   }
 
   .profile img {
-    width: 180px;
-    height: 180px;
+    width: 170px;
+    height: 170px;
     border-radius: 50%;
     object-fit: cover;
-    box-shadow: 0 4px 14px rgba(0,0,0,0.1);
-    flex-shrink: 0; /* 防止头像被挤压 */
+    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+    flex-shrink: 0; 
   }
 
   .social-links {
@@ -86,21 +92,29 @@
     font-weight: 500;
     display: flex;
     gap: 15px;
+    font-size: 0.95rem;
   }
 
   /* 教育经历区块 */
   .edu-item {
     display: flex;
     gap: 20px;
-    margin-bottom: 15px;
+    margin-bottom: 18px;
   }
   .edu-year {
-    min-width: 100px;
-    font-weight: 600;
+    min-width: 110px;
+    font-weight: 500;
     color: var(--text-light);
+    font-size: 0.95rem;
+    padding-top: 2px;
   }
   .edu-info p {
-    margin: 0 0 4px 0;
+    margin: 0 0 5px 0;
+    font-size: 0.95rem;
+  }
+  .edu-info strong {
+    color: #24292e;
+    font-size: 1rem;
   }
 
   /* 论文区块 */
@@ -108,21 +122,31 @@
     display: flex;
     gap: 25px;
     margin-bottom: 35px;
-    transition: transform 0.2s ease;
-  }
-  
-  .paper:hover {
-    transform: translateY(-3px);
   }
 
-  .paper img {
+  /* 论文图片：核心修改区域，保证完整显示不变形 */
+  .paper-img-wrapper {
     width: 180px;
-    height: 120px;
-    object-fit: cover; /* 完美裁剪，不变形 */
-    object-position: center;
-    border-radius: 8px;
+    height: 110px;
+    flex-shrink: 0;
+    border-radius: 6px;
     border: 1px solid var(--border-color);
-    flex-shrink: 0; /* 核心：防止图片被右侧长文本挤压 */
+    background-color: #f9f9f9; /* 浅灰底色，用于填补比例不一时产生的空白 */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+  }
+
+  .paper-img-wrapper img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain; /* 保证原比例完整显示，绝不拉伸或裁剪 */
+    transition: transform 0.3s ease;
+  }
+
+  .paper:hover .paper-img-wrapper img {
+    transform: scale(1.05); /* 悬停时轻微放大，增加交互感 */
   }
 
   .paper-content {
@@ -132,7 +156,7 @@
   .paper-title {
     font-weight: 700;
     font-size: 1.1rem;
-    color: #111827;
+    color: #24292e;
     margin-bottom: 6px;
     line-height: 1.4;
   }
@@ -140,6 +164,7 @@
   .paper-authors {
     margin-bottom: 4px;
     font-size: 0.95rem;
+    color: #24292e;
   }
 
   .paper-venue {
@@ -148,6 +173,8 @@
     margin-bottom: 10px;
     font-size: 0.95rem;
   }
+
+  /* 移除了红色标签样式，保留原有的 venue 字体颜色 */
 
   .paper-desc {
     color: var(--text-light);
@@ -158,28 +185,27 @@
   /* 论文链接按钮 */
   .paper-links a {
     display: inline-block;
-    font-size: 0.85rem;
-    font-weight: 600;
-    text-transform: uppercase;
-    border: 1px solid var(--primary-color);
+    font-size: 0.8rem;
+    font-weight: 500;
+    color: var(--primary-color);
+    border: 1px solid rgba(3, 102, 214, 0.3);
+    background-color: rgba(3, 102, 214, 0.05);
     padding: 3px 10px;
-    border-radius: 4px;
-    margin-right: 8px;
+    border-radius: 12px; /* 圆角按钮 */
+    margin-right: 6px;
     transition: all 0.2s ease;
+    text-decoration: none;
   }
   .paper-links a:hover {
     background-color: var(--primary-color);
     color: white;
-    text-decoration: none;
+    border-color: var(--primary-color);
   }
 
   /* 审稿服务区块 */
-  .service-list {
-    margin: 0;
-    padding-left: 20px;
-  }
-  .service-list li {
-    margin-bottom: 8px;
+  .service-text {
+    font-size: 0.95rem;
+    color: var(--text-main);
   }
 
   /* 手机端响应式适配 */
@@ -190,6 +216,7 @@
     .profile {
       flex-direction: column-reverse;
       text-align: center;
+      gap: 20px;
     }
     .social-links {
       justify-content: center;
@@ -197,16 +224,15 @@
     }
     .edu-item {
       flex-direction: column;
-      gap: 5px;
+      gap: 2px;
     }
     .paper {
       flex-direction: column;
       gap: 15px;
     }
-    .paper img {
+    .paper-img-wrapper {
       width: 100%;
-      height: auto;
-      aspect-ratio: 16/9; /* 手机上按宽屏比例显示图片 */
+      height: 160px; /* 手机上适当加高 */
     }
   }
 </style>
@@ -244,7 +270,7 @@
     <div class="edu-year">2025 - 2026</div>
     <div class="edu-info">
       <p><strong>University of Surrey, UK</strong></p>
-      <p>CSC Joint Ph.D. Student</p>
+      <p>China Scholarship Council (CSC) Joint Ph.D. Student</p>
       <p>Supervisor: <a href="https://x-up-lab.github.io/" target="_blank">Prof. Xiatian Zhu</a></p>
     </div>
   </div>
@@ -270,12 +296,15 @@
   <h2>Publications</h2>
 
   <div class="paper">
-    <img src="images/ethoclip.jpg" alt="EthoCLIP">
+    <div class="paper-img-wrapper">
+      <img src="images/ethoclip.jpg" alt="EthoCLIP">
+    </div>
     <div class="paper-content">
       <div class="paper-title">EthoCLIP: Ontology-Enhanced Video-Language Pretraining for Animal Behavior Understanding</div>
       <div class="paper-authors"><strong>Yinuo Jing</strong>, Jinyan Wu, Zixi Yang, Kongming Liang, Xiatian Zhu, Zhanyu Ma.</div>
-      <div class="paper-venue">CVPR 2026</div>
+      <div class="paper-venue">CVPR 2026 (Highlight)</div>
       <div class="paper-links">
+        <a href="https://openaccess.thecvf.com/content/CVPR2026/html/Jing_EthoCLIP_Ontology-Enhanced_Video-Language_Pretraining_for_Animal_Behavior_Understanding_CVPR_2026_paper.html" target="_blank">Paper</a>
         <a href="#">Code</a>
       </div>
       <div class="paper-desc">An ontology-enhanced framework for animal behavior understanding.</div>
@@ -283,7 +312,9 @@
   </div>
 
   <div class="paper">
-    <img src="images/animalclip.jpg" alt="Animal-CLIP">
+    <div class="paper-img-wrapper">
+      <img src="images/animalclip.jpg" alt="Animal-CLIP">
+    </div>
     <div class="paper-content">
       <div class="paper-title">Animal-CLIP: A Dual-Prompt Enhanced Vision-Language Model for Animal Action Recognition</div>
       <div class="paper-authors"><strong>Yinuo Jing</strong>, Kongming Liang, Ruxu Zhang, Hao Sun, Yongxiang Li.</div>
@@ -297,7 +328,9 @@
   </div>
 
   <div class="paper">
-    <img src="images/animalbench.jpg" alt="Animal-Bench">
+    <div class="paper-img-wrapper">
+      <img src="images/animalbench.jpg" alt="Animal-Bench">
+    </div>
     <div class="paper-content">
       <div class="paper-title">Animal-Bench: Benchmarking Multimodal Video Models</div>
       <div class="paper-authors"><strong>Yinuo Jing</strong>, Ruxu Zhang, Kongming Liang, Yongxiang Li.</div>
@@ -311,7 +344,9 @@
   </div>
 
   <div class="paper">
-    <img src="images/prompt.jpg" alt="Category-Specific Prompts">
+    <div class="paper-img-wrapper">
+      <img src="images/prompt.jpg" alt="Category-Specific Prompts">
+    </div>
     <div class="paper-content">
       <div class="paper-title">Category-Specific Prompts for Animal Action Recognition</div>
       <div class="paper-authors"><strong>Yinuo Jing</strong>, Chunyu Wang, Ruxu Zhang.</div>
@@ -325,7 +360,9 @@
   </div>
 
   <div class="paper">
-    <img src="images/robench.jpg" alt="RO-Bench">
+    <div class="paper-img-wrapper">
+      <img src="images/robench.jpg" alt="RO-Bench">
+    </div>
     <div class="paper-content">
       <div class="paper-title">RO-Bench: Robustness Evaluation of Multimodal Large Models</div>
       <div class="paper-authors">Zixi Yang, Jiapeng Li, <strong>Yinuo Jing</strong>, Kongming Liang.</div>
@@ -339,10 +376,9 @@
 
   <!-- Service Section -->
   <h2>Academic Service</h2>
-  <ul class="service-list">
-    <li><strong>Reviewer for Journals:</strong> IJCV, IEEE Transactions on Image Processing (TIP), IEEE Transactions on Circuits and Systems for Video Technology (T-CSVT).</li>
-    <li><strong>Reviewer for Conferences:</strong> CVPR, NeurIPS, ICASSP.</li>
-  </ul>
+  <p class="service-text">
+    <strong>Reviewer for Journals and Conferences:</strong> IJCV, IEEE Transactions on Image Processing (TIP), IEEE Transactions on Circuits and Systems for Video Technology (T-CSVT), CVPR, NeurIPS, ICASSP.
+  </p>
 
 </div>
 
